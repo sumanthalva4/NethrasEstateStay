@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nethra's Estate Stay</title>
+  <style>
+    /* CSS styles for slideshow and other sections */
+    .slideshow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin-bottom: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .slideshow img {
+      display: none;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    
+    .slideshow img.active {
+      display: block;
+    }
+    
+    /* Additional styling */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+    
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-top: 0;
+      padding: 20px;
+    }
+    
+    h2 {
+      color: #333;
+      margin-top: 30px;
+    }
+    
+    p {
+      line-height: 1.5;
+      color: #333;
+    }
+    
+    .description {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .button {
+      display: inline-block;
+      background-color: #0066cc;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .button:hover {
+      background-color: #004080;
+    }
+    
+    .slideshow-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 100%;
+    }
+    
+    .slideshow-nav button {
+      background: none;
+      border: none;
+      color: #0066cc;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    
+    .slideshow-nav .prev-button {
+      position: absolute;
+      left: 20px;
+    }
+    
+    .slideshow-nav .next-button {
+      position: absolute;
+      right: 20px;
+    }
+    
+    /* Fullscreen image */
+    .fullscreen-image {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+    
+    .fullscreen-image img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+    }
+    
+    /* Navigation menu */
+    .navbar {
+      background-color: #333;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+    
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      padding: 10px;
+      transition: background-color 0.3s ease;
+    }
+    
+    .navbar a:hover {
+      background-color: #666;
+    }
+    
+    /* Contact section */
+    #contact {
+      background-color: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    #contact h2 {
+      margin-bottom: 20px;
+    }
+    
+    #contact p {
+      margin-bottom: 10px;
+    }
+    
+    #contact .contact-info {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    
+    #contact .contact-info .info-item {
+      margin: 10px;
+    }
+    
+    #contact .contact-info .info-item i {
+      margin-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </div>
+  
+  <h1>Welcome to <span style="color: #cc0033;">Nethra's Home Stay</span></h1>
+  
+  <div id="home" class="slideshow"></div>
+  
+  <div id="about" class="description">
+    <h2>About Us</h2>
+    <p>
+      Nethra's Home Stay is a beautiful home stay located in the heart of nature. 
+      Experience the tranquility and serenity of our charming cottages while 
+      enjoying stunning views of the surrounding estate and lush greenery.
+    </p>
+    <p>
+      Our friendly staff and excellent amenities will ensure that your stay is 
+      comfortable and memorable. Come and create unforgettable moments with us!
+    </p>
+    <p><a href="https://maps.app.goo.gl/HS2jADduyiqj2w416" class="button">Get Directions</a></p>
+  </div>
+  
+  <div id="contact">
+    <h2>Contact Us</h2>
+    <p>For bookings and inquiries, please contact us:</p>
+    
+    <div class="contact-info">
+      <div class="info-item">
+        <i class="fas fa-phone"></i>
+        <p>Phone: +91 9448720450 / +91 8660122420</p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-envelope"></i>
+        <p>Email: nethrasestate237@gmail.com</p>
+      </div>
+      <div class="info-item">
+        <i class="fas fa-map-marker-alt"></i>
+        <p>Address: Nethras Estate Stay, Madikeri, Haleri, Kedakal Negadalu, Karnataka 571237</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript for slideshow functionality
+    const slideshowContainer = document.querySelector('.slideshow');
+    const imageFolder = './images/'; // Path to your image folder
+    
+    const images = [
+      'image1.jpg',
+      'image2.jpg',
+      'image3.jpg',
+      'image4.jpg',
+      'image5.jpg',
+      'image6.jpg',
+      'image7.jpg',
+      'image8.jpg',
+      'image9.jpg',
+      'image10.jpg',
+      'image11.jpg',
+      'image12.jpg',
+      'image13.jpg',
+      'image14.jpg',
+      'image15.jpg',
+      'image16.jpg',
+      'image17.jpg',
+      'image18.jpg',
+      'image19.jpg',
+      'image20.jpg',
+      'image21.jpg',
+      'image22.jpg',
+      'image23.jpg',
+      'image24.jpg',
+      'image25.jpg',
+      'image26.jpg',
+      'image27.jpg',
+      'image28.jpg',
+      // Add more image filenames here
+    ];
+    
+    let currentImageIndex = 0;
+    let isTransitioning = false;
+    
+    function showNextImage() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      
+      const img = document.createElement('img');
+      img.src = imageFolder + images[currentImageIndex];
+      
+      const previousImage = slideshowContainer.querySelector('.active');
+      if (previousImage) {
+        previousImage.classList.remove('active');
+      }
+      
+      img.classList.add('active');
+      slideshowContainer.appendChild(img);
+      
+      currentImageIndex = (currentImageIndex + 1) % images.length;
+      
+      img.addEventListener('load', () => {
+        isTransitioning = false;
+      });
+    }
+    
+    function showPreviousImage() {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      
+      const img = document.createElement('img');
+      img.src = imageFolder + images[currentImageIndex];
+      
+      const previousImage = slideshowContainer.querySelector('.active');
+      if (previousImage) {
+        previousImage.classList.remove('active');
+      }
+      
+      img.classList.add('active');
+      slideshowContainer.appendChild(img);
+      
+      currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+      
+      img.addEventListener('load', () => {
+        isTransitioning = false;
+      });
+    }
+    
+    function showFullscreenImage() {
+      if (isTransitioning) return;
+      
+      const activeImage = slideshowContainer.querySelector('img.active');
+      if (activeImage) {
+        const fullscreenContainer = document.createElement('div');
+        fullscreenContainer.classList.add('fullscreen-image');
+        
+        const fullscreenImg = document.createElement('img');
+        fullscreenImg.src = activeImage.src;
+        
+        fullscreenContainer.appendChild(fullscreenImg);
+        document.body.appendChild(fullscreenContainer);
+        
+        fullscreenContainer.addEventListener('click', () => {
+          fullscreenContainer.remove();
+        });
+      }
+    }
+    
+    function initSlideshow() {
+      setInterval(showNextImage, 3000); // Change image every 3 seconds
+    }
+    
+    initSlideshow();
+    
+    const slideshowNav = document.createElement('div');
+    slideshowNav.classList.add('slideshow-nav');
+    
+    const prevButton = document.createElement('button');
+    prevButton.innerHTML = '&lt;';
+    prevButton.classList.add('prev-button');
+    prevButton.addEventListener('click', showPreviousImage);
+    slideshowNav.appendChild(prevButton);
+    
+    const nextButton = document.createElement('button');
+    nextButton.innerHTML = '&gt;';
+    nextButton.classList.add('next-button');
+    nextButton.addEventListener('click', showNextImage);
+    slideshowNav.appendChild(nextButton);
+    
+    slideshowContainer.appendChild(slideshowNav);
+    
+    slideshowContainer.addEventListener('click', showFullscreenImage);
+  </script>
+</body>
+</html>
