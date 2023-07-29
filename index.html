@@ -256,47 +256,47 @@
     let currentImageIndex = 0;
     let isTransitioning = false;
     
+    function lazyLoadImage(index) {
+      const img = document.createElement('img');
+      img.src = imageFolder + images[index];
+      img.classList.add('slideshow-img');
+      slideshowContainer.appendChild(img);
+      return img;
+  }
+    
     function showNextImage() {
       if (isTransitioning) return;
       isTransitioning = true;
-      
-      const img = document.createElement('img');
-      img.src = imageFolder + images[currentImageIndex];
       
       const previousImage = slideshowContainer.querySelector('.active');
       if (previousImage) {
         previousImage.classList.remove('active');
       }
       
-      img.classList.add('active');
-      slideshowContainer.appendChild(img);
-      
       currentImageIndex = (currentImageIndex + 1) % images.length;
       
-      img.addEventListener('load', () => {
+      const nextImage = lazyLoadImage(currentImageIndex);
+      nextImage.addEventListener('load', () => {
         isTransitioning = false;
+        nextImage.classList.add('active');  
       });
     }
     
     function showPreviousImage() {
       if (isTransitioning) return;
       isTransitioning = true;
-      
-      const img = document.createElement('img');
-      img.src = imageFolder + images[currentImageIndex];
-      
+
       const previousImage = slideshowContainer.querySelector('.active');
       if (previousImage) {
         previousImage.classList.remove('active');
       }
-      
-      img.classList.add('active');
-      slideshowContainer.appendChild(img);
-      
+
       currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-      
-      img.addEventListener('load', () => {
+
+      const prevImage = lazyLoadImage(currentImageIndex);
+      prevImage.addEventListener('load', () => {
         isTransitioning = false;
+        prevImage.classList.add('active');
       });
     }
     
